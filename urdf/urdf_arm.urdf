@@ -1,0 +1,434 @@
+<?xml version="1.0" ?>
+<robot name="manipulator">
+
+  <material name="yellow">
+    <color rgba="0.0 0.8 0.0 1.0"/>
+  </material>
+  <material name="red">
+    <color rgba="0.0 0.8 0.0 1.0"/>
+  </material>
+  <material name="black">
+    <color rgba="0.0 0.0 0.0 1.0"/>
+  </material>
+  <material name="blue">
+    <color rgba="0.0 0.0 0.0 1.0"/>
+  </material>
+ <material name="white">
+    <color rgba="0.0 0.0 0.0 1.0"/>
+  </material>
+    <link name="world" />
+    <!-- BASE LINK -->
+    <link name="base_link">
+        <visual>
+            <origin rpy="0 0 0" xyz="0 0 0.01" />
+            <material name="silver">
+                <color rgba="0.75 0.75 0.75 1" />
+            </material>
+             
+        </visual>
+        <collision>
+            <origin rpy="0 0 0" xyz="0 0 0.01" />
+            <geometry>
+                <cylinder length="0.02" radius="0.5" />
+            </geometry>
+        </collision>
+        
+        <inertial>
+
+            <mass value="0.1" />
+            <inertia ixx="0.03" iyy="0.03" izz="0.03" ixy="0.0" ixz="0.0" iyz="0.0" />
+        </inertial>
+
+    </link>
+    <gazebo reference="base_link">
+        <material>Gazebo/White</material>
+	<turnGravityOff>false</turnGravityOff>
+    </gazebo>
+    <!-- joint -->
+    <joint name="fixed" type="fixed">
+        <parent link="world" />
+        <child link="base_link" />
+    </joint>
+    <!-- LINK 1 -->
+    <link name="link1">
+        <visual>
+            <origin rpy="0 0 0" xyz="0 0 0.05" />
+            <!-- linknte paathi distance -->
+            <geometry>
+                <cylinder length="0.10" radius="0.10" />
+            </geometry>
+          <material name="silver">
+                <color rgba="0.75 0.75 0.75 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin rpy="0 0 0" xyz="0 0 0.05" />
+            <geometry>
+                <cylinder length="0.10" radius="0.10" />
+            </geometry>
+        </collision>
+        
+<inertial>
+            <mass value="0.1" />
+            <inertia ixx="0.03" iyy="0.03" izz="0.03" ixy="0.0" ixz="0.0" iyz="0.0" />
+        </inertial>
+
+    </link>
+    <gazebo reference="link1">
+        <material>Gazebo/Black</material>
+	<turnGravityOff>false</turnGravityOff>
+    </gazebo>
+    <!-- JOINT 1 -->
+    <joint name="joint1" type="continuous">
+        <origin rpy="0 0 0" xyz="0 0 0.01" />
+        <!--parent linknte distance -->
+        <parent link="base_link" />
+        <child link="link1" />
+        <axis xyz="0 0 1" />
+    </joint>
+    <!-- LINK 2 -->
+    <link name="link2">
+        <visual>
+            <origin rpy="0 0 0" xyz="0 0 0.15" />
+            <geometry>
+                <cylinder length="0.30" radius="0.03" />
+            </geometry>
+            <material name="silver">
+                <color rgba="0.75 0.75 0.75 1" />
+            </material>
+           
+        </visual>
+        <collision>
+            <origin rpy="0 0 0" xyz="0 0 0.15" />
+            <geometry>
+                <cylinder length="0.30" radius="0.03" />
+            </geometry>
+        </collision>
+        
+<inertial>
+            <mass value="0.1" />
+            <inertia ixx="0.03" iyy="0.03" izz="0.03" ixy="0.0" ixz="0.0" iyz="0.0" />
+        </inertial>
+
+    </link>
+    <gazebo reference="link2">
+        <material>Gazebo/Blue</material>
+	<turnGravityOff>false</turnGravityOff>
+    </gazebo>
+    <!-- JOINT 2 -->
+    <joint name="joint2" type="revolute">
+        <origin rpy="0 0 0" xyz="0 0 0.08" />
+        <parent link="link1" />
+        <child link="link2" />
+        <axis xyz="0 1 0" />
+        <limit lower="-1.57" upper="1.57" effort="100" velocity="1" />
+        <dynamics damping="0.01" friction="0.01" />
+    </joint>
+    <!-- LINK 3 -->
+    <link name="link3">
+        <visual>
+            <origin rpy="0 0 0" xyz="0 0 0.15" />
+            <geometry>
+                <cylinder length="0.30" radius="0.03" />
+            </geometry>
+            <material name="silver">
+                <color rgba="0.75 0.75 0.75 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin rpy="0 0 0" xyz="0 0 0.15" />
+            <geometry>
+                <cylinder length="0.30" radius="0.03" />
+            </geometry>
+        </collision>
+        
+<inertial>
+            <mass value="0.1" />
+            <inertia ixx="0.03" iyy="0.03" izz="0.03" ixy="0.0" ixz="0.0" iyz="0.0" />
+        </inertial>
+
+    </link>
+    <gazebo reference="link3">
+        <material>Gazebo/Black</material>
+	<turnGravityOff>false</turnGravityOff>
+    </gazebo>
+    <!-- JOINT 3 -->
+    <joint name="joint3" type="revolute">
+        <origin rpy="0 0 0" xyz="0 0 0.28" />
+        <parent link="link2" />
+        <child link="link3" />
+        <axis xyz="0 1 0" />
+        <limit lower="-2.57" upper="2.57" effort="100" velocity="1" />
+        <dynamics damping="0.01" friction="0.01" />
+    </joint>
+    <!-- LINK 4 -->
+    <link name="link4">
+        <visual>
+            <origin rpy="0 0 0" xyz="0 0 0.05" />
+            <geometry>
+                <box size="0.03 0.03 0.1" />
+            </geometry>
+           <material name="silver">
+                <color rgba="0.75 0.75 0.75 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin rpy="0 0 0" xyz="0 0 0.05" />
+            <geometry>
+                <box size="0.03 0.03 0.1" />
+            </geometry>
+        </collision>
+        
+       <inertial>
+            <mass value="0.1" />
+            <inertia ixx="0.03" iyy="0.03" izz="0.03" ixy="0.0" ixz="0.0" iyz="0.0" />
+        </inertial>
+
+    </link>
+    <gazebo reference="link4">
+        <material>Gazebo/Blue</material>
+	<turnGravityOff>false</turnGravityOff>
+    </gazebo>
+    <!-- JOINT 4 -->
+    <joint name="joint4" type="revolute">
+        <origin rpy="0 0 0" xyz="0 0 0.28" />
+        <parent link="link3" />
+        <child link="link4" />
+        <axis xyz="0 0 1" />
+        <limit lower="-3.14" upper="3.14" effort="100" velocity="1" />
+        <dynamics damping="0.01" friction="0.01" />
+    </joint>
+    <!-- LINK 5 -->
+    <link name="link5">
+        <visual>
+            <origin rpy="0 0 0" xyz="0 0 0.05" />
+            <geometry>
+                <box size="0.03 0.03 0.1" />
+            </geometry>
+           <material name="silver">
+                <color rgba="0.75 0.75 0.75 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin rpy="0 0 0" xyz="0 0 0.05" />
+            <geometry>
+                <box size="0.03 0.03 0.1" />
+            </geometry>
+        </collision>
+        
+<inertial>
+            <mass value="0.1" />
+            <inertia ixx="0.03" iyy="0.03" izz="0.03" ixy="0.0" ixz="0.0" iyz="0.0" />
+        </inertial>
+
+    </link>
+    <gazebo reference="link5">
+        <material>Gazebo/Black</material>
+	<turnGravityOff>false</turnGravityOff>
+    </gazebo>
+    <!-- JOINT 5 -->
+    <joint name="joint5" type="revolute">
+        <origin rpy="0 0 0" xyz="0 0 0.08" />
+        <parent link="link4" />
+        <child link="link5" />
+        <axis xyz="0 1 0" />
+        <limit lower="-2.57" upper="2.57" effort="100" velocity="1" />
+        <dynamics damping="0.01" friction="0.01" />
+    </joint>
+    <!-- LINK 6 -->
+    <link name="link6">
+        <visual>
+            <origin rpy="0 0 0" xyz="0 0 0.05" />
+            <geometry>
+                <cylinder length="0.10" radius="0.04" />
+            </geometry>
+          <material name="silver">
+                <color rgba="0.75 0.75 0.75 1" />
+            </material>
+            <material name="Blue" />
+        </visual>
+        <collision>
+            <origin rpy="0 0 0" xyz="0 0 0.05" />
+            <geometry>
+                <cylinder length="0.10" radius="0.04" />
+            </geometry>
+        </collision>
+        
+<inertial>
+            <mass value="0.1" />
+            <inertia ixx="0.03" iyy="0.03" izz="0.03" ixy="0.0" ixz="0.0" iyz="0.0" />
+        </inertial>
+
+    </link>
+    <gazebo reference="link6">
+        <material>Gazebo/Blue</material>
+	<turnGravityOff>false</turnGravityOff>
+    </gazebo>
+    <!-- JOINT 6 -->
+    <joint name="joint6" type="revolute">
+        <origin rpy="0 0 0" xyz="0 0 0.08" />
+        <parent link="link5" />
+        <child link="link6" />
+        <axis xyz="1 0 0" />
+        <limit lower="-2.57" upper="2.57" effort="100" velocity="1" />
+        <dynamics damping="0.01" friction="0.01" />
+    </joint>
+    <link name="finger1">
+        <visual>
+            <geometry>
+                <box size="0.01 0.01 .05" />
+            </geometry>
+            <material name="silver">
+                <color rgba="0.75 0.75 0.75 1" />
+            </material>
+            <origin rpy="0 0 0" xyz="0.005 0.005 0.025 " />
+        </visual>
+        <collision>
+            <geometry>
+                <box size="0.01 0.01 .05" />
+            </geometry>
+            <origin rpy="0 0 0" xyz="0.005 0.005 0.025" />
+        </collision>
+        
+<inertial>
+            <mass value="0.1" />
+            <inertia ixx="0.03" iyy="0.03" izz="0.03" ixy="0.0" ixz="0.0" iyz="0.0" />
+        </inertial>
+
+    </link>
+    <gazebo reference="finger1">
+        <material>Gazebo/White</material>
+	<turnGravityOff>false</turnGravityOff>
+    </gazebo>
+    <joint name="f_joint1" type="prismatic">
+        <axis xyz="0 1 0" />
+        <limit effort="20" lower="0.0" upper="0.020" velocity="0.2" />
+        <parent link="link6" />
+        <child link="finger1" />
+        <origin rpy="0 0 0" xyz="0 -0.025 0.1" />
+    </joint>
+    <link name="finger2">
+        <visual>
+            <geometry>
+                <box size="0.01 0.01 .05" />
+            </geometry>
+            <material name="silver">
+                <color rgba="0.75 0.75 0.75 1" />
+            </material>
+            <origin rpy="0 0 0" xyz="0.005 0.005 0.025 " />
+        </visual>
+        <collision>
+            <geometry>
+                <box size="0.01 0.01 .05" />
+            </geometry>
+            <origin rpy="0 0 0" xyz="0.005 0.005 0.025 " />
+        </collision>
+        
+<inertial>
+            <mass value="0.1" />
+            <inertia ixx="0.03" iyy="0.03" izz="0.03" ixy="0.0" ixz="0.0" iyz="0.0" />
+        </inertial>
+
+    </link>
+    <gazebo reference="finger2">
+        <material>Gazebo/White</material>
+	<turnGravityOff>false</turnGravityOff>
+    </gazebo>
+    <joint name="f_joint2" type="prismatic">
+        <axis xyz="0 1 0" />
+        <limit effort="20" lower="-0.020" upper="0" velocity="0.2" />
+        <parent link="link6" />
+        <child link="finger2" />
+        <origin rpy="0 0 0" xyz="0 0.025 0.1" />
+    </joint>
+    <gazebo>         
+      <plugin name="rrrr_joint_state" filename="libgazebo_ros_joint_state_publisher.so">
+      <ros>
+        <!-- <namespace>/tb3</namespace> -->
+        <remapping>~/out:=joint_states</remapping>
+      </ros>
+      <update_rate>30</update_rate>
+      <joint_name>joint1</joint_name>
+      <joint_name>joint2</joint_name>
+      <joint_name>joint3</joint_name>
+      <joint_name>joint4</joint_name>
+      <joint_name>joint5</joint_name>
+      <joint_name>joint6</joint_name>
+      <joint_name>f_joint1</joint_name>
+      <joint_name>f_joint2</joint_name>
+    </plugin>
+
+  </gazebo>           
+		<ros2_control name="GazeboSimSystem" type="system">
+			<hardware>
+				<plugin>gazebo_ros2_control/GazeboSystem</plugin>
+	    	</hardware>
+
+	       <joint name="joint1">
+                <command_interface name="position"/>
+                <state_interface name="position">
+                  <param name="initial_value">0</param>
+                </state_interface>
+                <state_interface name="velocity"/>
+            </joint>
+            <joint name="joint2">
+                <command_interface name="position"/>
+                <state_interface name="position">
+                  <param name="initial_value">0</param>
+                </state_interface>
+                <state_interface name="velocity"/>
+            </joint>
+            <joint name="joint3">
+                <command_interface name="position"/>
+                <state_interface name="position">
+                  <param name="initial_value">0</param>
+                </state_interface>
+                <state_interface name="velocity"/>
+            </joint>
+            <joint name="joint4">
+                <command_interface name="position"/>
+                <state_interface name="position">
+                  <param name="initial_value">0</param>
+                </state_interface>
+                <state_interface name="velocity"/>
+            </joint>
+            <joint name="joint5">
+                <command_interface name="position"/>
+                <state_interface name="position">
+                  <param name="initial_value">0</param>
+                </state_interface>
+                <state_interface name="velocity"/>
+            </joint>
+            <joint name="joint6">
+                <command_interface name="position"/>
+                <state_interface name="position">
+                  <param name="initial_value">0</param>
+                </state_interface>
+                <state_interface name="velocity"/>
+            </joint>
+            <joint name="f_joint1">
+                <command_interface name="position"/>
+                <state_interface name="position">
+                  <param name="initial_value">0</param>
+                </state_interface>
+                <state_interface name="velocity"/>
+            </joint>
+            <joint name="f_joint2">
+                <command_interface name="position"/>
+                <state_interface name="position">
+                  <param name="initial_value">0</param>
+                </state_interface>
+                <state_interface name="velocity"/>
+            </joint>
+
+	  	</ros2_control>
+
+		<gazebo>
+			<plugin name="gazebo_ros2_control" filename="libgazebo_ros2_control.so">
+        		<robot_sim_type>gazebo_ros2_control/DefaultRobotHWSim</robot_sim_type> 
+			<parameters>/home/sanjuna/ros2_ws/src/rrr_moveit_config/config/ros2_controllers.yaml</parameters>
+
+		    </plugin>
+		</gazebo>
+
+</robot>
