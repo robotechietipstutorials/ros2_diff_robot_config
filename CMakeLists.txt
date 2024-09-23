@@ -9,7 +9,7 @@ endif()
 find_package(ament_cmake REQUIRED)
 find_package(rclpy REQUIRED)
 install(
-  DIRECTORY launch urdf param map rviz scripts src world  config
+  DIRECTORY launch urdf param map rviz world  config
   DESTINATION share/${PROJECT_NAME}
 )
 if(BUILD_TESTING)
